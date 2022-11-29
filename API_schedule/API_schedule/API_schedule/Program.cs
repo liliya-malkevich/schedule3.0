@@ -27,7 +27,9 @@ builder.Services.AddCors((setup) => {
 
 builder.Services.AddSingleton<DBRepository>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IExamSchedule, ExamSchedule>();
 builder.Services.AddSingleton<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddSingleton<ITeacherSchedule, TeacherSchedule>();
 
 var app = builder.Build();
 

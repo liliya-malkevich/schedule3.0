@@ -23,13 +23,18 @@ namespace API_schedule.DAO.Impl
             return table;
         }
 
+        public DataTable GetCourseList()
+        {
+            DataTable table = _repository.ExecuteProc("[dbo].[CKurs_PossibleList]");
+            return table;
+        }
         public DataTable GetGroupList(int IdFormaTime, int IdKurs, int IdF)
         {
             SqlParameter[] paramsProc = new SqlParameter[]
            {
-                 new SqlParameter("@IdFormaTime", SqlDbType.Decimal, 18) { Value = IdFormaTime },
-                 new SqlParameter("@IdKurs", SqlDbType.Decimal, 18) { Value = IdKurs },
-                 new SqlParameter("@IdF", SqlDbType.Decimal, 18) { Value = IdF }
+                 new SqlParameter("@IdFormaTime",  SqlDbType.Int) { Value = IdFormaTime },
+                 new SqlParameter("@IdKurs",  SqlDbType.Int) { Value = IdKurs },
+                 new SqlParameter("@IdF",  SqlDbType.Int) { Value = IdF }
            };
             DataTable table = _repository.ExecuteProc("[dbo].[CGroups_List]", paramsProc);
             return table;
@@ -39,10 +44,20 @@ namespace API_schedule.DAO.Impl
         {
             SqlParameter[] paramsProc = new SqlParameter[]
            {
-                 new SqlParameter("@IdGroup", SqlDbType.Decimal, 18) { Value = IdGroup },
-                 new SqlParameter("@IsWinter", SqlDbType.Bit,1) { Value = IsWinter }
+                 new SqlParameter("@IdGroup", SqlDbType.Int) { Value = IdGroup },
+                 new SqlParameter("@IsWinter", SqlDbType.Bit) { Value = IsWinter }
            };
             DataTable table = _repository.ExecuteProc("[sch].[sprSchedule_List]", paramsProc);
+            return table;
+        }
+
+        public DataTable GetSpecialisationForGroup(int IdGroup)
+        {
+            SqlParameter[] paramsProc = new SqlParameter[]
+           {
+                 new SqlParameter("@IdGroup",SqlDbType.Int) { Value = IdGroup },
+           };
+            DataTable table = _repository.ExecuteProc("[sch].[Groups_ListScPlan]", paramsProc);
             return table;
         }
     }

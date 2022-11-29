@@ -8,5 +8,7 @@ namespace API_schedule.DAO
         DataTable GetFormaTimeList();
         DataTable GetGroupList(int IdFormaTime,int IdKurs,int IdF);
         DataTable GetScheduleList(int IdGroup, bool IsWinter);
+        DataTable GetCourseList();
+        DataTable GetSpecialisationForGroup(int IdGroup);
     }
 }
