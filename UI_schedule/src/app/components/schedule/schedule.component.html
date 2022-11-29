@@ -1,0 +1,43 @@
+
+
+<!-- <p>ghbytydt</p>
+<div class="mb-4">
+  <dx-select-box placeholder="Должность..." valueExpr="Name" displayExpr="Name"
+    [searchEnabled]="true" searchMode="startsWith" [dataSource]="faculties" [showClearButton]="true">
+  </dx-select-box>
+</div> -->
+
+
+<dx-popup width="90vw" height="80vh" [showTitle]="true" title="Расписание" [dragEnabled]="true"
+  [closeOnOutsideClick]="false" [(visible)]="formVisible" [shading]="true" [resizeEnabled]="true" (onHidden)="onCloseForm()">
+  <div *dxTemplate="let data of 'content'">
+    <div class="popup__body">
+      <dx-scroll-view height="100%" width="100%" showScrollbar="always">
+        <h5>Выберите факультет</h5>
+        <dx-select-box #FacultySelectBox valueExpr="idF" displayExpr="Name" placeholder="Факультет" [dataSource]="facultiesStore"
+        (onSelectionChanged)="onFacultySelectionChanged($event)">
+        </dx-select-box>
+        <!--Table with numbers for add to dept-->
+        <div class="mt-2">
+          <h5>Выберите курс</h5>
+          <dx-select-box #CourseSelectBox valueExpr="idKurs" displayExpr="idKurs" placeholder="Курс" [dataSource]="courseStore"
+        (onSelectionChanged)="onFacultySelectionChanged($event)">
+        </dx-select-box>
+        </div>
+        <!--List with assigned depts-->
+        <div *ngIf="GroupNumbersVisible" class="mt-2">
+          <h5>Выберите номер группы</h5>
+          <div class="border">
+            <dx-select-box #GroupSelectBox valueExpr="IdGroup" displayExpr="Name" placeholder="Группа" [dataSource]="GroupStore"
+            (onSelectionChanged)="onFacultySelectionChanged($event)">
+            </dx-select-box>
+          </div>
+        </div>
+      </dx-scroll-view>
+    </div>
+    <div class="popup__footer">
+      <!-- <dx-button type="default" class="me-1" text="Добавить" (onClick)="addNumber()" [disabled]="disableSave"></dx-button> -->
+      <dx-button type="normal" text="Отмена" (onClick)="formVisible = false"></dx-button>
+    </div>
+  </div>
+</dx-popup>
